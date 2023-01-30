@@ -1,0 +1,39 @@
+plugins {
+    id "org.springframework.boot" version "2.5.7"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "java"
+    id "war"
+    id "jacoco"
+}
+
+sourceCompatibility = 17
+
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("org.springframework.boot:spring-boot-starter-test"){
+        exclude group: "org.junit.vintage", module: "junit-vintage-engine"
+    }
+
+    // Lombok
+    compileOnly "org.projectlombok:lombok:1.18.22"
+    annotationProcessor "org.projectlombok:lombok:1.18.22"
+    testCompileOnly "org.projectlombok:lombok:1.18.22"
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.22"
+
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+    implementation("io.springfox:springfox-swagger-ui:2.9.2")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+}
+
+test {
+    useJUnitPlatform()
+}

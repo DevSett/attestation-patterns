@@ -1,18 +1,24 @@
 package ru.devsett.patterntask.controller;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.devsett.patterntask.dto.CalcType;
 import ru.devsett.patterntask.dto.request.CalcRequest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
 class MathControllerTest {
-
 
     private MathController mathController;
     private Double testValue = -10.1098D;
+    private Double testValue2 = 10.1098D;
+    private Double testValue3 = 0.5D;
 
     @Autowired
     public MathControllerTest(MathController mathController) {
@@ -30,11 +36,11 @@ class MathControllerTest {
 
     @Test
     void calcAcosOk() {
-        var request = new CalcRequest(CalcType.ACOS, testValue);
+        var request = new CalcRequest(CalcType.ACOS, testValue3);
 
         var response = mathController.calc(request);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(Math.acos(testValue), response.getBody().getResult());
+        assertEquals(Math.acos(testValue3), response.getBody().getResult());
     }
 
     @Test
@@ -57,19 +63,19 @@ class MathControllerTest {
 
     @Test
     void calcSqrtOk() {
-        var request = new CalcRequest(CalcType.SQRT, testValue);
+        var request = new CalcRequest(CalcType.SQRT, testValue2);
 
         var response = mathController.calc(request);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(Math.sqrt(testValue), response.getBody().getResult());
+        assertEquals(Math.sqrt(testValue2), response.getBody().getResult());
     }
 
     @Test
     void calcSqrtAndLogOk() {
-        var request = new CalcRequest(CalcType.SQRTANDLOG, testValue);
+        var request = new CalcRequest(CalcType.SQRTANDLOG, testValue2);
 
         var response = mathController.calc(request);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(Math.sqrt(Math.log(testValue)), response.getBody().getResult());
+        assertEquals(Math.sqrt(Math.log(testValue2)), response.getBody().getResult());
     }
 }

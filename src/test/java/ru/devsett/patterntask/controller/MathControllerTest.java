@@ -66,7 +66,7 @@ class MathControllerTest {
 
     @Test
     void calcSqrtAndLogOk() {
-        var request = new CalcRequest(CalcType.SQRT, testValue);
+        var request = new CalcRequest(CalcType.SQRTANDLOG, testValue);
 
         var response = mathController.calc(request);
         assertEquals(HttpStatus.OK, response.getStatusCode());
